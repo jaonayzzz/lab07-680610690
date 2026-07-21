@@ -12,6 +12,7 @@ import {
   zStudentPutBody,
 } from "@libs/studentValidator.js";
 import { success } from 'zod';
+import type { ok } from 'node:assert';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -43,19 +44,19 @@ app.get("/api/students", (req: Request, res: Response) => {
         (student) => student.program === program
       );
       return res.json({
-        success: true,
+        ok: true,
         data: filtered_students,
       });
     } else {
       return res.json({
-        success: true,
-        count: students.length,
-        data: students,
+        ok: true,
+        count: filtered_students.length,
+        data: filtered_students,
       });
     }
   } catch (err) {
     return res.json({
-      success: false,
+      ok: false,
       message: "Something is wrong, please try again",
       error: err,
     });
@@ -175,7 +176,7 @@ app.delete("/api/students", (req: Request, res: Response) => {
 
     if(foundIndex === -1){
       return res.status(404).json({
-        success: false,
+        ok: false,
         message: "Student does not exists"
       })
     }
@@ -183,13 +184,13 @@ app.delete("/api/students", (req: Request, res: Response) => {
     const deleted_student = students.splice(foundIndex,1);
 
     return res.status(200).json({
-      success: true,
+      ok: true,
       message: `Student ${body.studentId} has been deleted successfully`,
-      data: deleted_student[0],
+      
     });
   }catch(err){
     return res.json({
-      success: false,
+      ok: false,
       message: "Something is wrong, please try again",
       error: err,
     })
