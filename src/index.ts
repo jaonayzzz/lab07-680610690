@@ -39,7 +39,7 @@ app.get("/api/students", (req: Request, res: Response) => {
     }
 
     if (program) {
-      filtered_students = students.filter(
+      filtered_students = filtered_students.filter(
         (student) => student.program === program
       );
       return res.json({
