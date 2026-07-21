@@ -20,7 +20,7 @@ app.use(morgan("dev", { immediate: false }));
 app.use(express.json());    // parses request's payload into 'req.body'
 
 // Endpoints
-app.get("/api/students", (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("API services for Student Data");
 });
 
